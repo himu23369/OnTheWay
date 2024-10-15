@@ -19,6 +19,7 @@ export interface IShipment {
   userId: string | IUser;
   deliveryAssociateId?: string | IDeliveryAssociate;
   status: ShipmentStatus;
+  price: any;
 }
 
 export interface IShipmentSchema extends IShipment, Document {}
@@ -48,6 +49,10 @@ const ShipmentSchema: Schema = new Schema(
       ref: 'deliveryassociate',
       required: false,
     },
+    price: {
+      type: Number, // Add price field to the schema
+      required: false, // Not required at the time of creation, as it will be calculated
+    }
   },
   { timestamps: true }
 );

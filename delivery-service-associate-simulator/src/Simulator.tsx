@@ -32,8 +32,8 @@ const initialValues: {
   center: [number, number];
   scrollWheelZoom: boolean;
 } = {
-  zoom: 15,
-  center: [13.092123232608643, 80.28222309087568],
+  zoom: 14.5,
+  center: [30.3398, 76.3869],
   scrollWheelZoom: true,
 };
 
