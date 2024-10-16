@@ -14,7 +14,7 @@ export default function MainAppBar() {
             component='div'
             sx={{ flexGrow: 1 }}
             onClick={() => {
-              navigate('/');
+              navigate('/login');
             }}
             style={{
               cursor: 'pointer',

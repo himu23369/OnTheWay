@@ -14,12 +14,12 @@ export enum ShipmentStatus {
   cancelled = 'cancelled',
 }
 export interface IShipment {
+  price: any;
   pickupLocation: Point;
   dropLocation: Point;
   userId: string | IUser;
   deliveryAssociateId?: string | IDeliveryAssociate;
   status: ShipmentStatus;
-  price: any;
 }
 
 export interface IShipmentSchema extends IShipment, Document {}
