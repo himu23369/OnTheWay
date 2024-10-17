@@ -36,6 +36,10 @@ import './dashboard.css';
 import { createShipment } from '../api';
 // import GifInfo from '../components/GifInfo';
 
+import QRCode from 'react-qr-code';
+
+import { FormControl, FormControlLabel, Radio, RadioGroup, FormLabel } from '@mui/material';
+
 const socket = io(API_URL);
 
 const initialState: State = {
@@ -311,12 +315,57 @@ const Dashboard = () => {
           )}
         </div>
 
-        {/* Display Price */}
-        {state.dashboardStatus === DashboardStatus.ASSOCIATE_ASSIGNED && price !== null && (
+        {/* Display Price
+        {price !== null && (
           <div className="price-container flex-center">
             <h3 className="price-text">Total Price: ₹ {price.toPrecision(4)}</h3>
           </div>
-        )}
+        )} */}
+
+ {/* Display Price and Payment Options */}
+ {price !== null && (
+        <div className="price-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h3 className="price-text">Total Price: ₹ {price.toPrecision(4)}</h3>
+
+          {/* Payment Options */}
+          <div className="payment-options" style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <FormControl component="fieldset">
+              <FormLabel component="legend" style={{ marginBottom: '10px' }}>
+                Choose Payment Method:
+              </FormLabel>
+              <RadioGroup
+                aria-label="payment-method"
+                defaultValue="credit-card"
+                name="radio-buttons-group"
+              >
+                <FormControlLabel
+                  value="credit-card"
+                  control={<Radio />}
+                  label="Credit Card"
+                />
+                <FormControlLabel
+                  value="debit-card"
+                  control={<Radio />}
+                  label="Debit Card"
+                />
+                <FormControlLabel
+                  value="paypal"
+                  control={<Radio />}
+                  label="PayPal"
+                />
+              </RadioGroup>
+            </FormControl>
+          </div>
+
+          {/* QR Code for payment */}
+          <div className="qr-code-container" style={{ marginTop: '20px', textAlign: 'center' }}>
+            <h4>Or Pay via QR Code:</h4>
+            <QRCode value={`Total Price: ₹ ${price.toPrecision(4)}`} size={150} />
+          </div>
+        </div>
+      )}
+
+
 
         {/* Gif Info */}
         {/* <div className='flex-center'>
