@@ -5,6 +5,8 @@ import AppResponse from '../types/AppResponse';
 import createOne from '../services/shipment/createOne';
 import updateDeliveryAssociate from '../services/shipment/updateDeliveryAssociate';
 import updateStatus from '../services/shipment/updateStatus';
+import getAll from '../services/shipment/getAll'; // Import getAll service
+import deleteOne from '../services/shipment/deleteOne'; // Import delete service
 
 // Function to calculate the distance between two points using the Haversine formula
 const calculateDistance = (pickupLocation: { type: 'Point'; coordinates: [number, number] }, dropLocation: { type: 'Point'; coordinates: [number, number] }): number => {
@@ -48,6 +50,7 @@ export const createShipment = async (
 
     // Calculate the distance between the pickup and drop-off locations
     const distance = calculateDistance(pickupLocation, dropLocation);
+    console.log(distance)
 
     // Calculate the price based on the distance
     const price = calculatePrice(distance);
@@ -60,6 +63,8 @@ export const createShipment = async (
       userId: req.user.userId,
       price, // Add price to the shipment
     };
+
+    console.log(newShipment)
 
     // Save the shipment to the database
     const createdShipment = await createOne(newShipment);
@@ -74,7 +79,6 @@ export const createShipment = async (
     next(error);
   }
 };
-
 
 // export const createShipment = async (
 //   req: AppRequest,
@@ -138,5 +142,26 @@ export const patchStatus = async (
     res.send(response);
   } catch (error) {
     next(error);
+  }
+};
+
+
+// Get all shipments (Admin view)
+export const getAllShipments = async (req: AppRequest, res: Response) => {
+  try {
+    const shipments = await getAll(); // Use the new getAll service
+    res.json(shipments);
+  } catch (error) {
+    res.status(500).json({ message: error.message, isError: true });
+  }
+};
+
+// Delete shipment by ID
+export const deleteShipment = async (req: AppRequest, res: Response) => {
+  try {
+    await deleteOne(req.params.id); // Use the delete service
+    res.json({ message: 'Shipment deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message, isError: true });
   }
 };

@@ -22,10 +22,22 @@ routes.post('/auth/login', auth.login);
 //deliveryAssociate
 routes.get('/delivery-associate/:id', deliveryAssociate.getDAById);
 routes.post('/delivery-associate', deliveryAssociate.createDeliveryAssociate);
-    
+
 // Shipment
 routes.patch('/shipment/:id/delivery-associate', shipment.patchDeliveryAssociate);
 routes.patch('/shipment/:id/status', shipment.patchStatus);
+
+//admindeliveryAssociate    
+routes.get('/delivery-associates', deliveryAssociate.getAllDeliveryAssociates); // Get all delivery associates
+routes.delete('/delivery-associates/:id', deliveryAssociate.deleteDeliveryAssociate); // Delete delivery associate by ID
+
+//admin user
+routes.get('/users', user.getAllUsersController); // Get all users
+routes.delete('/users/:id', user.deleteUserController); // Delete user by ID
+
+//shipment
+routes.get('/shipments', shipment.getAllShipments); // Get all shipments
+routes.delete('/shipments/:id', shipment.deleteShipment); // Delete shipment by ID
 
 // Auth middleware
 routes.use(verifyJwt);

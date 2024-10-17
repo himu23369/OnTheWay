@@ -4,6 +4,8 @@ import AppResponse from '../types/AppResponse';
 import { createLocalUser } from '../services/user/createOne';
 import getById from '../services/user/getById';
 import deleteById from '../services/user/deleteById';
+import { getAllUsers } from '../services/user/getAllUsers';
+import deleteUser from '../services/user/deleteUser';
 import AppRequest from 'AppRequest';
 
 export const createUser = async (
@@ -68,5 +70,37 @@ export const getMe = async (
     res.send(response);
   } catch (error) {
     next(error);
+  }
+};
+
+
+// Get all users (Admin view)
+export const getAllUsersController = async (
+  req: Request,         // Explicitly type 'req' as Request
+  res: Response<AppResponse>, // Explicitly type 'res' as Response<AppResponse>
+  next: NextFunction     // Explicitly type 'next' as NextFunction
+) => {
+  try {
+    const users = await getAllUsers(); // Fetch all users
+    const response: AppResponse = { data: users, isError: false };
+    res.json(response); // Send the response back
+  } catch (error) {
+    next(error); // Call the next middleware with the error
+  }
+};
+
+// Delete user by ID
+export const deleteUserController = async (
+  req: Request,          // Explicitly type 'req' as Request
+  res: Response<AppResponse>, // Explicitly type 'res' as Response<AppResponse>
+  next: NextFunction      // Explicitly type 'next' as NextFunction
+) => {
+  try {
+    const userId: string = req.params.id; // Get user ID from request params
+    const message = await deleteUser(userId); // Delete user by ID
+    const response: AppResponse = { data: message, isError: false };
+    res.json(response); // Send the response back
+  } catch (error) {
+    next(error); // Call the next middleware with the error
   }
 };
