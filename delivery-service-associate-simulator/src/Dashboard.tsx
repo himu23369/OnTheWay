@@ -56,9 +56,9 @@ const Dashboard = (props: Props) => {
       }}
     >
       <Card>
-        <CardContent>
+        {/* <CardContent>
           <Typography gutterBottom variant='h5' component='div'>
-            Associate Details
+            Delivery Partner Details
           </Typography>
           <Box
             sx={{
@@ -80,14 +80,50 @@ const Dashboard = (props: Props) => {
               </Typography>
             </Stack>
           </Box>
-        </CardContent>
+        </CardContent> */}
+<CardContent>
+  <Typography
+    gutterBottom
+    variant='h5'
+    component='div'
+    sx={{ fontWeight: 'bold', color: '#2e3b55' }}
+  >
+    Delivery Partner Details
+  </Typography>
+  
+  <Box
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      padding: '10px 0',
+      backgroundColor: '#f4f6f8',
+      borderRadius: '8px',
+      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
+    }}
+  >
+    <Stack spacing={1.5} sx={{ padding: '10px 15px' }}>
+      <Typography variant='body1' sx={{ fontWeight: '500' }}>
+        <strong>ID:</strong> {_id}
+      </Typography>
+      <Typography variant='body1' sx={{ fontWeight: '500' }}>
+        <strong>Email:</strong> {email}
+      </Typography>
+      <Typography variant='body1' sx={{ fontWeight: '500' }}>
+        <strong>Name:</strong> {name}
+      </Typography>
+    </Stack>
+  </Box>
+</CardContent>
+
       </Card>
+
       <div style={{ margin: '20px 0px' }}>
         {/* New Shipment Notification */}
         {newShipmentRequest._id ? (
           <ShipmentRequest onAccept={onAccept} onReject={onReject} />
         ) : null}
       </div>
+      
     </div>
   );
 };

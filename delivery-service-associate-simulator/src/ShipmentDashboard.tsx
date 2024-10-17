@@ -86,7 +86,7 @@ const ShipmentDashboard = (props: Props) => {
             }}
           >
             <Card>
-              <CardContent>
+              {/* <CardContent>
                 <Typography gutterBottom variant='h5' component='div'>
                   Shipment details
                 </Typography>
@@ -107,7 +107,41 @@ const ShipmentDashboard = (props: Props) => {
                   </Stack>
                   <Divider />
                 </Box>
-              </CardContent>
+              </CardContent> */}
+              <CardContent>
+  <Typography
+    gutterBottom
+    variant='h5'
+    component='div'
+    sx={{ fontWeight: 'bold', color: '#2e3b55' }}
+  >
+    Shipment Details
+  </Typography>
+
+  <Box
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#f4f6f8',
+      borderRadius: '8px',
+      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
+      padding: '15px 20px',
+      marginTop: '10px',
+    }}
+  >
+    <Stack spacing={1.5}>
+      <Typography variant='body1' sx={{ fontWeight: '500' }}>
+        <strong>ID:</strong> {shipmentData?._id}
+      </Typography>
+      <Typography variant='body1' sx={{ fontWeight: '500' }}>
+        <strong>Status:</strong> {statusDisplayName[shipmentData.status]}
+      </Typography>
+    </Stack>
+
+    <Divider sx={{ margin: '15px 0', borderColor: '#e0e0e0' }} />
+  </Box>
+</CardContent>
+
             </Card>
           </div>
           <div
@@ -123,6 +157,7 @@ const ShipmentDashboard = (props: Props) => {
               onClick={async () => {
                 await onShipmentStatusUpdate(updateAction().statusToUpdate);
               }}
+              sx={{ backgroundColor: '#2e3b55', '&:hover': { backgroundColor: '#2e3b55' } }}
             >
               {updateAction().actionName}
             </Button>

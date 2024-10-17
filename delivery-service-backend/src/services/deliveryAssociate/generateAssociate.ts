@@ -7,11 +7,15 @@ import {
 
 const generateAssociate = async (): Promise<IDeliveryAssociate> => {
   try {
-    const BBOX_GEORGE_TOWN: [number, number, number, number] = [
-      80.274868, 13.082266, 80.294523, 13.120292,
-    ];
+    const THAPAR: [number, number, number, number] = [
+      30.3562,
+      76.3647, 
+      30.3380, 
+      76.4000  
+  ];
+  
     const randomLocation = turf.randomPoint(1, {
-      bbox: BBOX_GEORGE_TOWN,
+      bbox: THAPAR,
     });
     const randomPoint = randomLocation.features[0].geometry;
     const deliveryAssociate: IDeliveryAssociate = {

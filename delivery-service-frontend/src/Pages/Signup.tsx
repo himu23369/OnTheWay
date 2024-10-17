@@ -29,17 +29,27 @@ function Copyright(props: any) {
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#2e3b55',  // Same primary color for consistency
+    },
+    secondary: {
+      main: '#ffc107',   // Accent color for highlights
+    },
+  },
+});
 
 export default function SignUp() {
   const [isUserCreated, setIsUserCreated] = useState(false);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
     const fullname = data.get('fullname');
-    console.log(email, fullname)
+    
     if (email && fullname && password) {
       // @ts-ignore
       const createdUser = await createUser(email, fullname, password);
@@ -59,14 +69,18 @@ export default function SignUp() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            bgcolor: '#f9f9f9',
+            padding: 3,
+            borderRadius: 2,
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', // Same professional shadow
           }}
         >
-          <UserCreated isOpen={isUserCreated} />;
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <UserCreated isOpen={isUserCreated} />
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component='h1' variant='h5'>
-            Sign up
+          <Typography component='h1' variant='h5' sx={{ fontWeight: 'bold', color: '#2e3b55' }}>
+            Sign Up
           </Typography>
           <Box
             component='form'
@@ -84,6 +98,17 @@ export default function SignUp() {
                   id='fullname'
                   label='Full Name'
                   autoFocus
+                  InputLabelProps={{ style: { color: '#2e3b55' } }}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: '#2e3b55',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#ffc107',
+                      },
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -94,6 +119,17 @@ export default function SignUp() {
                   label='Email Address'
                   name='email'
                   autoComplete='email'
+                  InputLabelProps={{ style: { color: '#2e3b55' } }}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: '#2e3b55',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#ffc107',
+                      },
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -105,6 +141,17 @@ export default function SignUp() {
                   type='password'
                   id='password'
                   autoComplete='new-password'
+                  InputLabelProps={{ style: { color: '#2e3b55' } }}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: '#2e3b55',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#ffc107',
+                      },
+                    },
+                  }}
                 />
               </Grid>
             </Grid>
@@ -112,13 +159,29 @@ export default function SignUp() {
               type='submit'
               fullWidth
               variant='contained'
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                backgroundColor: '#2e3b55',
+                '&:hover': {
+                  backgroundColor: '#1c2533',
+                },
+              }}
             >
               Sign Up
             </Button>
             <Grid container justifyContent='flex-end'>
               <Grid item>
-                <Link href='/login' variant='body2'>
+                <Link
+                  href='/login'
+                  variant='body2'
+                  sx={{
+                    color: '#2e3b55',
+                    '&:hover': {
+                      color: '#ffc107',
+                    },
+                  }}
+                >
                   Already have an account? Sign in
                 </Link>
               </Grid>

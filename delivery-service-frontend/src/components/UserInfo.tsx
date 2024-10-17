@@ -5,7 +5,6 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
-
 import { IUser } from '../types';
 import { getUserData } from '../api';
 
@@ -22,24 +21,31 @@ const UserInfo = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const userData = await getUserData();
-      setUserData(userData.data);
+      const response = await getUserData();
+      setUserData(response.data);
     };
     fetchUserData();
   }, []);
 
   return (
-    <Card>
-      <Box sx={{ p: 2, display: 'flex' }}>
+    <Card elevation={3} sx={{ borderRadius: '10px' }}>
+      <Box sx={{ p: 2, display: 'flex', alignItems: 'center' }}>
         <Avatar
           variant='rounded'
           src='avatar1.jpg'
-          style={{ marginRight: '5px' }}
+          alt={userData.name}
+          sx={{ width: 56, height: 56, marginRight: 2 }}
         />
         <Stack spacing={0.5}>
-          <Typography fontWeight={700}>{userData.name}</Typography>
-          <Typography fontWeight={700}>{userData.email}</Typography>
-          <Typography variant='body2' color='text.secondary'></Typography>
+          <Typography variant='h6' fontWeight={700}>
+            {userData.name}
+          </Typography>
+          <Typography variant='body2' color='text.secondary'>
+            {userData.email}
+          </Typography>
+          <Typography variant='body2' color='text.secondary'>
+            {userData.organization}
+          </Typography>
         </Stack>
       </Box>
       <Divider />
@@ -48,8 +54,13 @@ const UserInfo = () => {
         alignItems='center'
         justifyContent='space-between'
         sx={{ px: 2, py: 1, bgcolor: 'background.default' }}
-      ></Stack>
+      >
+        <Typography variant='body2' color='text.secondary'>
+          Roles: {userData.roles.join(', ') || 'N/A'}
+        </Typography>
+      </Stack>
     </Card>
   );
 };
+
 export default UserInfo;

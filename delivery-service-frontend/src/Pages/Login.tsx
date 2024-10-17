@@ -30,24 +30,37 @@ function Copyright(props: any) {
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#2e3b55',  // Adjust the primary color to match your branding
+    },
+    secondary: {
+      main: '#ffc107',   // Highlight color, suitable for buttons
+    },
+  },
+});
 
 export default function SignIn() {
   const navigate = useNavigate();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
-    // Login api
+
     if (email && password) {
-      // @ts-ignore
-      const loginOp = await login(email, password);
-      const token = loginOp.data.token;
-      localStorage.setItem('x-access-token', token);
-      navigate(`/dashboard`);
+      try {
+        // @ts-ignore
+        const loginOp = await login(email, password);
+        const token = loginOp.data.token;
+        localStorage.setItem('x-access-token', token);
+        navigate(`/dashboard`);
+      } catch (error) {
+        console.error('Login failed', error);
+      }
     }
-    // set access token in local storage
   };
 
   return (
@@ -60,13 +73,17 @@ export default function SignIn() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            bgcolor: '#f9f9f9', // Light background to make the form stand out
+            padding: 3,
+            borderRadius: 2,
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', // Soft shadow for professional touch
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component='h1' variant='h5'>
-            Sign in
+          <Typography component='h1' variant='h5' sx={{ fontWeight: 'bold', color: '#2e3b55' }}>
+            Sign In
           </Typography>
           <Box
             component='form'
@@ -83,6 +100,17 @@ export default function SignIn() {
               name='email'
               autoComplete='email'
               autoFocus
+              InputLabelProps={{ style: { color: '#2e3b55' } }} // Label color
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#2e3b55', // Border color for input fields
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#ffc107',
+                  },
+                },
+              }}
             />
             <TextField
               margin='normal'
@@ -93,6 +121,17 @@ export default function SignIn() {
               type='password'
               id='password'
               autoComplete='current-password'
+              InputLabelProps={{ style: { color: '#2e3b55' } }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#2e3b55',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#ffc107',
+                  },
+                },
+              }}
             />
             <FormControlLabel
               control={<Checkbox value='remember' color='primary' />}
@@ -102,17 +141,33 @@ export default function SignIn() {
               type='submit'
               fullWidth
               variant='contained'
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                backgroundColor: '#2e3b55',
+                '&:hover': {
+                  backgroundColor: '#1c2533',
+                },
+              }}
             >
               Sign In
             </Button>
-            {/* <Grid container>
+            <Grid container justifyContent="center">
               <Grid item>
-                <Link href='/signup' variant='body2'>
+                <Link
+                  href='/signup'
+                  variant='body2'
+                  sx={{
+                    color: '#2e3b55',
+                    '&:hover': {
+                      color: '#ffc107',
+                    },
+                  }}
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
-            </Grid> */}
+            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 4, mb: 4 }} />

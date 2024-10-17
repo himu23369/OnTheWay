@@ -26,7 +26,7 @@ function Home() {
     <div style={{ padding: '20px' }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Typography variant='h3' gutterBottom>
-          Delivery Associate Simulator
+           TransitPro
         </Typography>
       </div>
       <div>

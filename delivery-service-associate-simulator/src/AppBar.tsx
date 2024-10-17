@@ -21,7 +21,7 @@ export default function MainAppBar() {
               maxWidth: 'fit-content',
             }}
           >
-            Delivery Associate Simulator
+             TransitPro
           </Typography>
         </Toolbar>
       </AppBar>

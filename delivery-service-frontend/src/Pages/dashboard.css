@@ -9,7 +9,7 @@
 
 .col-2 {
   flex: 1;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   margin: 10px;
 }
 
@@ -21,4 +21,26 @@
   display: flex;
   justify-content: center;
   margin: 20px 0;
+}
+
+/* styles.css */
+.price-container {
+  background-color: #f0f8ff; /* Light blue background for visibility */
+  border: 1px solid #b0e0e6; /* Slightly darker border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 15px; /* Spacing inside the container */
+  margin: 20px 0; /* Spacing above and below the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center; /* Center text */
+}
+
+.price-text {
+  font-size: 24px; /* Larger font size for emphasis */
+  font-weight: bold; /* Bold text */
+  color: #2e3b55; /* Darker color for better readability */
+  margin: 0; /* Remove default margin */
+  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Lato', sans-serif; */
+
+
 }
