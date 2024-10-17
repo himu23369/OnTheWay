@@ -55,9 +55,23 @@ export const getAllDeliveryAssociates = async (req: AppRequest, res: Response) =
 export const deleteDeliveryAssociate = async (req: AppRequest, res: Response) => {
   try {
     const id = req.params.id;
-    await deleteOne(id); // Use the delete service
-    res.json({ message: 'Delivery associate deleted successfully' });
+    if (!id) {
+      return res.status(400).json({ message: 'Delivery associate ID is required', isError: true });
+    }
+
+    // Call the delete service
+    const deletedAssociate = await deleteOne(id);
+    
+    // Optionally log the deleted associate or take additional actions
+    console.log(`Deleted delivery associate: ${deletedAssociate._id}`);
+    
+    // Send a success response
+    res.json({ message: 'Delivery associate deleted successfully', deletedAssociate });
   } catch (error) {
+    // Log the error for debugging purposes
+    console.error('Error deleting delivery associate:', error);
+    
+    // Send an error response
     res.status(500).json({ message: error.message, isError: true });
   }
 };

@@ -74,12 +74,20 @@ const socketHandler = (io: Server) => {
       );
     }
   });
-  DeliveryAssociate.watch([], watchOptions).on('change', (data: any) => {
+  DeliveryAssociate.watch([], watchOptions)
+  .on('change', (data: any) => {
     const fullDocument = data.fullDocument;
-    io.to(String(fullDocument._id)).emit(
-      socketEvents.DA_LOCATION_CHANGED,
-      fullDocument
-    );
+    if (fullDocument) {
+      io.to(String(fullDocument._id)).emit(
+        socketEvents.DA_LOCATION_CHANGED,
+        fullDocument
+      );
+    } else {
+      console.warn('Received change event with no fullDocument:', data);
+    }
+  })
+  .on('error', (error) => {
+    console.error('Error in Change Stream for DeliveryAssociate:', error);
   });
 };
 export default socketHandler;

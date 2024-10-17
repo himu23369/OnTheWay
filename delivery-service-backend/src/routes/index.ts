@@ -5,6 +5,7 @@ import * as user from '../controller/user';
 import * as shipment from '../controller/shipment';
 import * as deliveryAssociate from '../controller/deliveryAssociate';
 import * as auth from '../controller/auth';
+import * as admin from '../controller/admin';
 import { pong } from '../controller/ping';
 
 let routes = Router();
@@ -35,9 +36,11 @@ routes.delete('/delivery-associates/:id', deliveryAssociate.deleteDeliveryAssoci
 routes.get('/users', user.getAllUsersController); // Get all users
 routes.delete('/users/:id', user.deleteUserController); // Delete user by ID
 
-//shipment
+//admin shipment
 routes.get('/shipments', shipment.getAllShipments); // Get all shipments
 routes.delete('/shipments/:id', shipment.deleteShipment); // Delete shipment by ID
+
+routes.get('/admin/stats', admin.getAdminStatsController);
 
 // Auth middleware
 routes.use(verifyJwt);

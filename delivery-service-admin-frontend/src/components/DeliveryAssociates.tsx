@@ -15,7 +15,7 @@ interface DeliveryAssociatesProps {
   handleDeleteDeliveryAssociate: (id: string) => void;
 }
 
-const DeliveryAssociates: React.FC<DeliveryAssociatesProps> = ({ deliveryAssociates, handleDeleteDeliveryAssociate }) => {
+const DeliveryAssociates: React.FC<DeliveryAssociatesProps> = React.memo(({ deliveryAssociates, handleDeleteDeliveryAssociate }) => {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -55,9 +55,7 @@ const DeliveryAssociates: React.FC<DeliveryAssociatesProps> = ({ deliveryAssocia
                 {associate.currentLocation.coordinates[1]}, {associate.currentLocation.coordinates[0]}
               </td>
               <td>
-                <button className="delete-button" onClick={() => handleDeleteDeliveryAssociate(associate._id)}>
-                  Delete
-                </button>
+                <button onClick={() => handleDeleteDeliveryAssociate(associate._id)}>Delete</button>
               </td>
             </tr>
           ))}
@@ -65,6 +63,6 @@ const DeliveryAssociates: React.FC<DeliveryAssociatesProps> = ({ deliveryAssocia
       </table>
     </div>
   );
-};
+});
 
 export default DeliveryAssociates;
