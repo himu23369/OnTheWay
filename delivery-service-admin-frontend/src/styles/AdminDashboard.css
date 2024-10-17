@@ -15,7 +15,7 @@
 /* Stats section */
 .admin-stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Ensure four columns in the first row */
+    grid-template-columns: repeat(3, 1fr); /* Ensure four columns in the first row */
     gap: 20px;
     margin-bottom: 30px;
 }
@@ -155,3 +155,13 @@ button.delete-button:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
 }
+.chart-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .chart {
+    width: 25%;
+  }
+  

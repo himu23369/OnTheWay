@@ -3,6 +3,7 @@ import axios from 'axios';
 import DeliveryAssociates from '../components/DeliveryAssociates';
 import Users from '../components/Users';
 import Shipments from '../components/Shipments';
+import StatsChart from '../components/StatsChart';
 import '../styles/AdminDashboard.css';
 
 interface DeliveryAssociate {
@@ -133,10 +134,10 @@ const AdminDashboard: React.FC = () => {
             <h2>Total Delivery Associates</h2>
             <p>{adminStats.totalDeliveryAssociates}</p>
           </div>
-          <div className="stat-card">
+          {/* <div className="stat-card">
             <h2>Total Shipments</h2>
             <p>{adminStats.totalShipments}</p>
-          </div>
+          </div> */}
           <div className="stat-card">
             <h2>Total Price of Delivered Shipments</h2>
             <p>Rs. {adminStats.totalPriceOfDeliveredShipments.toFixed(2)}</p>
@@ -158,6 +159,16 @@ const AdminDashboard: React.FC = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {adminStats && (
+        <StatsChart
+          totalUsers={adminStats.totalUsers}
+          totalDeliveryAssociates={adminStats.totalDeliveryAssociates}
+          totalShipments={adminStats.totalShipments}
+          deliveredShipments={adminStats.totalDeliveredShipments}
+          requestedShipments={adminStats.totalRequestedShipments}
+        />
       )}
 
       <div className="toggle-sections">
