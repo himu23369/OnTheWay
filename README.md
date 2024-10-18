@@ -1,6 +1,6 @@
 # OnTheWay Logistics Platform
 
-This platform manages logistics operations efficiently, handling high traffic and scaling to meet global demand. It consists of 4 main modules:
+This platform manages logistics operations efficiently, handling high traffic and scaling to meet global demand.
 
 ## Project Structure
 - **user-frontend**: User interface for booking and tracking deliveries.
@@ -18,17 +18,15 @@ This platform manages logistics operations efficiently, handling high traffic an
 
 2. **Install Dependencies:**
    Navigate into each folder and install the dependencies:
+
+ - For Frontend: 
    ```bash
    cd user-frontend
    npm install
    ```
-   ```bash
-   cd admin-frontend
-   npm install
-   ```
-   ```bash
-   cd associate-frontend
-   npm install
+   Do this for `admin-frontend` and `associate-frontend`.
+   
+ - For Backend Service: 
    ```
    ```bash
    cd backend
