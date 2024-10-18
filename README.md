@@ -27,13 +27,25 @@ This platform manages logistics operations efficiently, handling high traffic an
    Do this for `admin-frontend` and `associate-frontend`.
    
  - For Backend Service: 
-   ```
    ```bash
    cd backend
    npm install
    ```
 
-3. **Run the Project:**
+3. **Setup the Environment Variables**
+   For secure and flexible configuration, the backend requires a .env file. You must create this file in the backend directory and include the following environment variables:
+   ```bash
+   # MongoDB connection string
+   MONGO_CONNECTION_STRING=mongodb://<your-mongo-db-uri>
+
+   # Secret key for JWT or other encryption needs
+   SECRET_KEY=your_secret_key
+
+   # Port for backend service
+   PORT=5050
+   ```
+   
+4. **Run the Project:**
    To run each service:
    ```bash
    npm run dev
