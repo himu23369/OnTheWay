@@ -25,7 +25,7 @@ export default function MainAppBar() {
               },
             }}
           >
-            ShipMate
+             OnTheWay
           </Typography>
 
           {/* Right-aligned Buttons */}
